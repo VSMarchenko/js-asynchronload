@@ -40,8 +40,6 @@
 		this.start= function(){
 			// Перевіряємо чи почала картинка завантажуватися, функція оновлюється через заданий проміжок часу. Коли всі картинки завантажаться, функція зупиниться
 			var t = setInterval(function(){
-				//
-				heightImg();
 				for(var i = 0; i < $(thisClass+" img").length; i++) {
 					if (h[i] === 0) {
 						key = false;
@@ -51,6 +49,8 @@
 					}
 				}
 				if(key){
+					//
+					heightImg();
 					// Коли фото вже завантажилися, вмикаємо функцію показу, але для ефекту анімації робимо їх непрозорими
 					$(thisClass+" img").show().css({opacity:0});
 					$(that).parent().css({background:'none'});
