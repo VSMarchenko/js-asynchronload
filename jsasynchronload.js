@@ -12,37 +12,30 @@
         var thisClass = thisSelector + " ." + options.thisClass;
 	var total = $(thisClass+" img").length;
         var countColor = options.blockColors.length;
-        $(that).parent().css({background:'url('+options.preloaderImage+') no-repeat center center'});
+        var img = [];
+	$(that).parent().css({background:'url('+options.preloaderImage+') no-repeat center center'});
         
         $(thisClass+" img").each(function(i){
-            $(this).hide();
-	    // Ховаємо каритнку в блоці й заповнюємо сам блок кольорами з опції options.blockColors
-            $(this).parent().css({background:'rgba('+options.blockColors[Math.round( Math.random(0,(countColor - 1)) )]+', '+Math.random(5,10)+') url('+options.preloaderImage+') no-repeat center center'});
+		img[i] = $(this);
+	    	// Ховаємо каритнку в блоці й заповнюємо сам блок кольорами з опції options.blockColors
+		$(this).hide().parent().css({background:'rgba('+options.blockColors[Math.round( Math.random(0,(countColor - 1)) )]+', '+Math.random(5,10)+') url('+options.preloaderImage+') no-repeat center center'});
         });	
 		
 	var synchronize = function(){
-            var key = false; // Ключ чекає заватаження всіх файлів
-            var img = [];
-            var h = [];
-		
-            var imgLoaded = function(images) {                         
-                images.parent().css({background:'none'});
-                images.animate({opacity:1},500);
-		setTimeout(function(){
-			options.after();
-		},200);
-            };
-			
+		var key = false; // Ключ чекає заватаження всіх файлів
+		var h = [];
+
+		var imgLoaded = function(images) {                         
+			images.parent().css({background:'none'});
+			images.animate({opacity:1},500);
+			setTimeout(function(){
+				options.after();
+			},200);
+		};
+
 		var heightImg = function(){
 			$(thisClass+" img").each(function(i){
 				h[i] = $(this).height();                    
-			});
-		};
-
-		// Визначаємо 
-		this.imgList = function(){
-			$(thisClass+" img").each(function(i){
-				img[i] = $(this);
 			});
 		};
 
@@ -82,7 +75,6 @@
 		
         var init = function(){
 		var js = new synchronize();
-		js.imgList();
 		js.start();
         };
 	    
